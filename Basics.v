@@ -1533,8 +1533,16 @@ Theorem andb_eq_orb :
   forall (b c : bool),
   (andb b c = orb b c) ->
   b = c.
-Proof.
-  (* FILL IN HERE *) Admitted.
+  Proof.
+  intros b c. destruct b.
+  - destruct c.
+    + reflexivity.
+    + simpl. intro H. rewrite -> H. reflexivity.
+  - destruct c.
+    + simpl. intro H. rewrite -> H. reflexivity.
+    + reflexivity.
+  Qed.        
+  
 
 (** [] *)
 
