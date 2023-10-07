@@ -1087,10 +1087,9 @@ Proof.
     Remove "[Admitted.]" and fill in the proof. *)
 
 Theorem plus_id_exercise : forall n m o : nat,
-  n = m -> m = o -> n + m = m + o.
-Proof.
-  (* FILL IN HERE *) Admitted.
-(** [] *)
+n = m -> m = o -> n + m = m + o.
+Proof. intros n m o. intros H0. intros H1. rewrite -> H0. rewrite <- H1. reflexivity. Qed.
+  (** [] *)
 
 (** The [Admitted] command tells Coq that we want to skip trying
     to prove this theorem and just accept it as a given.  This can be
