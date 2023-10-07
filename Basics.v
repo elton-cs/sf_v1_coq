@@ -1648,7 +1648,8 @@ Compute letter_comparison B F.
 Theorem letter_comparison_Eq :
   forall l, letter_comparison l l = Eq.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. destruct l; simpl; reflexivity.
+Qed.
 (** [] *)
 
 (** We can follow the same strategy to define the comparison operation
