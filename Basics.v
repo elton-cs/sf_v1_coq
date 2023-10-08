@@ -1793,7 +1793,7 @@ Proof.
 Definition lower_grade (g : grade) : grade :=
   match g with
   | Grade F Minus => g
-  | Grade l m => 
+  | Grade l m =>
     match m with
     | Plus => Grade l Natural
     | Natural => Grade l Minus
@@ -1873,7 +1873,19 @@ Theorem lower_grade_lowers :
     grade_comparison (Grade F Minus) g = Lt ->
     grade_comparison (lower_grade g) g = Lt.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intro g. destruct g. destruct m. 
+  - destruct l; simpl; reflexivity.
+  - destruct l; simpl; reflexivity.
+  - destruct l.
+    + simpl. reflexivity.
+    + simpl. reflexivity.
+    + simpl. reflexivity.
+    + simpl. reflexivity.
+    + intros. rewrite <- H. rewrite -> lower_grade_F_Minus. simpl. reflexivity.
+Qed.
+(* NOTE: I probably DID use destruct more than intented but I couldn't find the 
+solution using rewrite with [letter_comparison_Eq] *)
+
 
 (** [] *)
 
