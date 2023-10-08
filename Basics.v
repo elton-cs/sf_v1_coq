@@ -1790,50 +1790,59 @@ Proof.
     component of the grade -- it should consider only the modifier.
     You should definitely _not_ try to enumerate all of the
     cases. (Our solution is under 10 lines of code, total.) *)
-Definition lower_grade (g : grade) : grade
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition lower_grade (g : grade) : grade :=
+  match g with
+  | Grade F Minus => g
+  | Grade l m => 
+    match m with
+    | Plus => Grade l Natural
+    | Natural => Grade l Minus
+    | Minus => Grade (lower_letter l) Plus
+    end
+  end.
 
 Example lower_grade_A_Plus :
   lower_grade (Grade A Plus) = (Grade A Natural).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
 
 Example lower_grade_A_Natural :
   lower_grade (Grade A Natural) = (Grade A Minus).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
 
 Example lower_grade_A_Minus :
   lower_grade (Grade A Minus) = (Grade B Plus).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
 
 Example lower_grade_B_Plus :
   lower_grade (Grade B Plus) = (Grade B Natural).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
 
 Example lower_grade_F_Natural :
   lower_grade (Grade F Natural) = (Grade F Minus).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
 
 Example lower_grade_twice :
   lower_grade (lower_grade (Grade B Minus)) = (Grade C Natural).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
 
 Example lower_grade_thrice :
   lower_grade (lower_grade (lower_grade (Grade B Minus))) = (Grade C Minus).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
 
 (** Note: Coq makes no distinction between an [Example] and a
     [Theorem]. We state this one as a [Theorem] only as a hint that we
     will use it in proofs below. *)
 Theorem lower_grade_F_Minus : lower_grade (Grade F Minus) = (Grade F Minus).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity. Qed.
+  
 
 (* GRADE_THEOREM 0.25: lower_grade_A_Plus *)
 (* GRADE_THEOREM 0.25: lower_grade_A_Natural *)
