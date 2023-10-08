@@ -520,7 +520,14 @@ Definition manual_grade_for_eqb_refl_informal : option (nat*string) := None.
 Theorem add_shuffle3 : forall n m p : nat,
   n + (m + p) = m + (n + p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p.
+  assert (H1: n + (m + p) = (n + m) + p).
+  - rewrite add_assoc. reflexivity.
+  - rewrite H1.
+    assert (H2: n + m = m + n).
+    + rewrite add_comm. reflexivity.
+    + rewrite H2. rewrite add_assoc. reflexivity.
+Qed.    
 
 (** Now prove commutativity of multiplication.  You will probably want
     to look for (or define and prove) a "helper" theorem to be used in
@@ -529,7 +536,15 @@ Proof.
 Theorem mul_comm : forall m n : nat,
   m * n = n * m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  induction m as [| m' IHm'].
+  - simpl. rewrite <- mult_n_O. reflexivity.
+  - simpl.
+    assert (H1: n + m' * n = n * (1 + m')).
+    + simpl. rewrite <- mult_n_Sm. rewrite add_comm. rewrite IHm'. reflexivity.
+    + rewrite <- mult_n_Sm. rewrite IHm'. rewrite add_comm. reflexivity.
+Qed.
+
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, optional (plus_leb_compat_l)
