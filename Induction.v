@@ -592,7 +592,10 @@ Qed.
 Theorem andb_false_r : forall b : bool,
   andb b false = false.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. destruct b.
+  - reflexivity.
+  - reflexivity.
+Qed.
 
 Theorem S_neqb_0 : forall n:nat,
   (S n) =? 0 = false.
