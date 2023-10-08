@@ -536,7 +536,14 @@ Qed.
 Theorem mul_comm : forall m n : nat,
   m * n = n * m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  induction m as [| m' IHm'].
+  - simpl. rewrite <- mult_n_O. reflexivity.
+  - simpl.
+    assert (H1: n + m' * n = n * (1 + m')).
+    + simpl. rewrite <- mult_n_Sm. rewrite add_comm. rewrite IHm'. reflexivity.
+    + rewrite <- mult_n_Sm. rewrite IHm'. rewrite add_comm. reflexivity.
+Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, optional (plus_leb_compat_l)
