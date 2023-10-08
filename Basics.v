@@ -1966,7 +1966,11 @@ Theorem grade_lowered_once :
     (grade_comparison (Grade F Minus) g = Lt) ->
     (apply_late_policy late_days g) = (lower_grade g).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros d g. intros. 
+  rewrite -> apply_late_policy_unfold. 
+  rewrite -> H. rewrite -> H0. 
+  reflexivity.
+Qed.
 
 (** [] *)
 End LateDays.
