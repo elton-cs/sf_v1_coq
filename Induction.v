@@ -557,7 +557,11 @@ Check leb.
 Theorem plus_leb_compat_l : forall n m p : nat,
   n <=? m = true -> (p + n) <=? (p + m) = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p. intro H.
+  induction p as [| p' IHp'].
+  - simpl. rewrite H. reflexivity.
+  - simpl. rewrite IHp'. reflexivity.
+Qed.  
 
 (** [] *)
 
