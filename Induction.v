@@ -261,7 +261,10 @@ Qed.
 Theorem eqb_refl : forall n : nat,
   (n =? n) = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  induction n as [| n' IHn'].
+  - reflexivity.
+  - simpl. rewrite -> IHn'. reflexivity.
+Qed.   
 (** [] *)
 
 (** **** Exercise: 2 stars, standard, optional (even_S)
