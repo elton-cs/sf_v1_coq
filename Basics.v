@@ -1944,7 +1944,10 @@ Theorem no_penalty_for_mostly_on_time :
     (late_days <? 9 = true) ->
     apply_late_policy late_days g = g.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros d g. intros. 
+  rewrite -> apply_late_policy_unfold. 
+  rewrite -> H. reflexivity.
+Qed.
 
 (** [] *)
 
