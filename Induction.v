@@ -279,7 +279,10 @@ Qed.
 Theorem even_S : forall n : nat,
   even (S n) = negb (even n).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction n as [| n' IHn'].
+  - reflexivity.
+  - rewrite -> IHn'. simpl. rewrite -> negb_involutive. reflexivity.
+Qed.  
 (** [] *)
 
 (** **** Exercise: 1 star, standard, optional (destruct_induction)
