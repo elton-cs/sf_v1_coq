@@ -1764,8 +1764,15 @@ Theorem lower_letter_lowers:
     letter_comparison F l = Lt ->
     letter_comparison (lower_letter l) l = Lt.
 Proof.
-(* FILL IN HERE *) Admitted.
-
+  intros l. 
+  destruct l.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - simpl. intros. rewrite -> H. reflexivity.
+  Qed.  
+  
 (** [] *)
 
 (** **** Exercise: 2 stars, standard (lower_grade)
