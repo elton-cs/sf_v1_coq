@@ -605,7 +605,10 @@ Qed.
 
 Theorem mult_1_l : forall n:nat, 1 * n = n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. rewrite mul_comm. destruct n.
+  - reflexivity.
+  - rewrite <- mult_n_Sm. rewrite mul_0_r. simpl. reflexivity.
+Qed.     
 
 Theorem all3_spec : forall b c : bool,
   orb
