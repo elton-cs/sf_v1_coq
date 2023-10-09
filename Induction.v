@@ -660,7 +660,12 @@ Qed.
 Theorem add_shuffle3' : forall n m p : nat,
   n + (m + p) = m + (n + p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. rewrite add_assoc'.
+  replace (n + m) with (m + n).
+  - rewrite add_assoc'. reflexivity.
+  - rewrite add_comm. reflexivity.
+Qed.
+  
 (** [] *)
 
 (* ################################################################# *)
