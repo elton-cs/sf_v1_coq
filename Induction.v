@@ -683,11 +683,20 @@ Inductive bin : Type :=
     from [Basics].  That will make it possible for this file to
     be graded on its own. *)
 
-Fixpoint incr (m:bin) : bin
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint incr (m:bin) : bin :=
+  match m with
+  | Z => B1 Z
+  | B0 m' => B1 m'
+  | B1 m' => B0 (incr m')
+  end.
 
-Fixpoint bin_to_nat (m:bin) : nat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint bin_to_nat (m:bin) : nat :=
+  match m with
+  | Z => 0
+  | B1 Z => 1
+  | B0 m' => 1 + bin_to_nat m'
+  | B1 m' => 2 + bin_to_nat m'
+  end.
 
 (** In [Basics], we did some unit testing of [bin_to_nat], but we
     didn't prove its correctness. Now we'll do so. *)
