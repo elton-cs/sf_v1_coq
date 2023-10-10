@@ -722,8 +722,14 @@ Fixpoint bin_to_nat (m:bin) : nat :=
 
 Theorem bin_to_nat_pres_incr : forall b : bin,
   bin_to_nat (incr b) = 1 + bin_to_nat b.
-Proof.
-  (* FILL IN HERE *) Admitted.
+  Proof.
+  intros. induction b as [| b' | b'' IHb'].
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - simpl. rewrite IHb'. simpl. rewrite add_0_r. 
+    rewrite plus_n_Sm. rewrite plus_n_Sm. rewrite plus_n_Sm. 
+    reflexivity.
+Qed.
 
 (** [] *)
 
