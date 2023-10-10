@@ -2029,8 +2029,8 @@ Fixpoint bin_to_nat (m:bin) : nat :=
   match m with
   | Z => 0
   | B1 Z => 1
-  | B0 m' => 1 + bin_to_nat m'
-  | B1 m' => 2 + bin_to_nat m'
+  | B0 m' => 2 * bin_to_nat m' 
+  | B1 m' => 1 + (2 * bin_to_nat m')
   end.
 
 (** The following "unit tests" of your increment and binary-to-unary
