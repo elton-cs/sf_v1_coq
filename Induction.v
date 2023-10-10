@@ -737,8 +737,11 @@ Qed.
 
 (** Write a function to convert natural numbers to binary numbers. *)
 
-Fixpoint nat_to_bin (n:nat) : bin
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint nat_to_bin (n:nat) : bin :=
+  match n with
+  | 0 => Z
+  | S n' => incr ( nat_to_bin n')
+  end.
 
 (** Prove that, if we start with any [nat], convert it to [bin], and
     convert it back, we get the same [nat] which we started with.
@@ -752,7 +755,10 @@ Fixpoint nat_to_bin (n:nat) : bin
 
 Theorem nat_bin_nat : forall n, bin_to_nat (nat_to_bin n) = n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. induction n as [| n' IHn'].
+  - simpl. reflexivity.
+  - simpl. rewrite bin_to_nat_pres_incr. simpl. rewrite IHn'. reflexivity.
+Qed.
 
 (** [] *)
 
