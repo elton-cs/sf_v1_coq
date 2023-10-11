@@ -541,12 +541,20 @@ Proof. simpl. reflexivity. Qed.
 
     Adding a value to a bag should increase the value's count by one.
     State this as a theorem and prove it in Coq. *)
-(*
-Theorem add_inc_count : ...
+
+Lemma eqb_refl : forall n : nat, 
+eqb n n = true.
 Proof.
-  ...
+(* SOLUTION: *)
+intros n. induction n as [| n'].
+- simpl. reflexivity.
+- simpl. rewrite IHn'. reflexivity.
 Qed.
-*)
+
+Theorem add_inc_count : forall v : nat, forall b : bag, count v (add v b) = 1 + count v b .
+Proof.
+  intros. rewrite plus_1_l. simpl. rewrite eqb_refl. reflexivity.
+Qed.
 
 (* Do not modify the following line: *)
 Definition manual_grade_for_add_inc_count : option (nat*string) := None.
