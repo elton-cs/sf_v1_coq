@@ -834,6 +834,12 @@ Abort.
 
 (* FILL IN HERE *)
 
+(* 
+I think the Idea is that binary zero aka "Z" can be written with 
+any number of trailing "B0" constructors and still be equivalent to zero.
+Similarly, other numbers can have leading "B0"s and still be equivalent to their respective values.
+*)
+
 (** To solve that problem, we can introduce a _normalization_ function
     that selects the simplest [bin] out of all the equivalent
     [bin]. Then we can prove that the conversion from [bin] to [nat] and
@@ -849,8 +855,13 @@ Abort.
     end of the [bin] and process each bit only once. Do not try to
     "look ahead" at future bits. *)
 
-Fixpoint normalize (b:bin) : bin
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint normalize (b:bin) : bin :=
+  (* B0 Z *)
+  match b with
+  | Z => Z
+  | B0 b' => double_bin (normalize b')
+  | B1 b' => B1 (normalize b')
+  end.
 
 (** It would be wise to do some [Example] proofs to check that your definition of
     [normalize] works the way you intend before you proceed. They won't be graded,
