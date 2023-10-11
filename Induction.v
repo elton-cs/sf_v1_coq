@@ -878,9 +878,31 @@ Fixpoint normalize (b:bin) : bin :=
     progress. We have one lemma for the [B0] case (which also makes 
     use of [double_incr_bin]) and another for the [B1] case. *)
 
+Lemma b0_case : forall n : nat, nat_to_bin (double n) = double_bin (nat_to_bin n).
+Proof.
+  intros.
+  induction n as [| n' IHn'].
+  - simpl. reflexivity.
+  - simpl. rewrite double_incr_bin. rewrite <- IHn'. reflexivity.
+Qed. 
+
+Lemma b1_case : forall b : bin, incr (double_bin (b)) = B1 (b).
+Proof.
+  intros. 
+  induction b as [| b' | b'' IHb'].
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+  - simpl. reflexivity.
+Qed.  
+
 Theorem bin_nat_bin : forall b, nat_to_bin (bin_to_nat b) = normalize b.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. 
+  induction b as [| b' | b'' IHb'].
+  - simpl. reflexivity.
+  - simpl. rewrite add_0_r. rewrite <- double_plus. rewrite <- IHb'. rewrite b0_case. reflexivity.
+  - simpl. rewrite add_0_r. rewrite <- double_plus. rewrite b0_case. rewrite IHb'. rewrite b1_case. reflexivity.
+Qed.
 
 (** [] *)
 
