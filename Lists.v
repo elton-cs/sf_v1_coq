@@ -1014,11 +1014,19 @@ Proof.
 
 (** Before doing the next exercise, make sure you've filled in the
    definition of [remove_one] above. *)
+
 (** **** Exercise: 3 stars, advanced (remove_does_not_increase_count) *)
 Theorem remove_does_not_increase_count: forall (s : bag),
   (count 0 (remove_one 0 s)) <=? (count 0 s) = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  induction s as [| n s' IHs'].
+  - simpl. reflexivity.
+  - induction n as [| n' IHn'].
+    + simpl. rewrite leb_n_Sn. reflexivity.
+    + simpl. rewrite IHs'. reflexivity.
+Qed.
+
 (** [] *)
 
 (** **** Exercise: 3 stars, standard, optional (bag_count_sum)
