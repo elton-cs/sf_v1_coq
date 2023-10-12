@@ -1049,7 +1049,11 @@ Qed.
 Theorem involution_injective : forall (f : nat -> nat),
     (forall n : nat, n = f (f n)) -> (forall n1 n2 : nat, f n1 = f n2 -> n1 = n2).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros f H1 n1 n2 H2. rewrite H1. rewrite <- H2.
+  induction n1 as [| n1' IHn1'].
+  - simpl. rewrite <- H1. reflexivity.
+  - rewrite <- H1. reflexivity.
+Qed.
 
 (** [] *)
 
