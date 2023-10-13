@@ -741,12 +741,16 @@ Definition partition {X : Type}
                      (test : X -> bool)
                      (l : list X)
                    : list X * list X
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+:= pair (filter test l) 
+        (filter (fun l' =>
+                  match test l' with
+                  | b => negb b
+                  end) l).
 
 Example test_partition1: partition odd [1;2;3;4;5] = ([1;3;5], [2;4]).
-(* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed. 
 Example test_partition2: partition (fun x => false) [5;9;0] = ([], [5;9;0]).
-(* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 (** [] *)
 
 (* ================================================================= *)
