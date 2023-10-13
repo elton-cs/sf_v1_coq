@@ -769,7 +769,7 @@ Fixpoint map {X Y : Type} (f : X->Y) (l : list X) : list Y :=
     been applied to each element of [l] in turn.  For example: *)
 
 Example test_map1: map (fun x => plus 3 x) [2;0;2] = [5;3;5].
-Proof. reflexivity. Qed.
+Proof. compute. reflexivity. Qed.
 
 (** The element types of the input and output lists need not be
     the same, since [map] takes _two_ type arguments, [X] and [Y]; it
@@ -778,7 +778,7 @@ Proof. reflexivity. Qed.
 
 Example test_map2:
   map odd [2;1;2;5] = [false;true;false;true].
-Proof. reflexivity. Qed.
+Proof. compute. reflexivity. Qed.
 
 (** It can even be applied to a list of numbers and
     a function from numbers to _lists_ of booleans to
@@ -787,7 +787,7 @@ Proof. reflexivity. Qed.
 Example test_map3:
     map (fun n => [even n;odd n]) [2;1;2;5]
   = [[true;false];[false;true];[true;false];[false;true]].
-Proof. reflexivity. Qed.
+Proof. compute. reflexivity. Qed.
 
 (* ----------------------------------------------------------------- *)
 (** *** Exercises *)
