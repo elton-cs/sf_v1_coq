@@ -507,6 +507,9 @@ Fixpoint combine {X Y : Type} (lx : list X) (ly : list Y)
 
     [] *)
 
+    Compute (combine [1;2] [false;false;true;true]).
+    Search (prod).
+
 (** **** Exercise: 2 stars, standard, especially useful (split)
 
     The function [split] is the right inverse of [combine]: it takes a
@@ -516,13 +519,18 @@ Fixpoint combine {X Y : Type} (lx : list X) (ly : list Y)
     Fill in the definition of [split] below.  Make sure it passes the
     given unit test. *)
 
-Fixpoint split {X Y : Type} (l : list (X*Y)) : (list X) * (list Y)
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint split {X Y : Type} (l : list (X*Y)) : (list X) * (list Y) :=
+  match l with
+  | nil => ([], [])
+  | h :: t => pair (fst h :: fst (split t)) (snd h :: snd (split t))
+  end. 
 
+  (* ([x] , [y]) *)
 Example test_split:
   split [(1,false);(2,false)] = ([1;2],[false;false]).
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros. simpl. reflexivity.
+Qed.
 (** [] *)
 
 (* ================================================================= *)
