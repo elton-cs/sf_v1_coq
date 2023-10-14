@@ -1003,14 +1003,21 @@ Qed.
     below. *)
 
 Definition fold_map {X Y: Type} (f: X -> Y) (l: list X) : list Y
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+:= fold ( fun lx recursiveFoldFunction => (f lx)::recursiveFoldFunction ) (l) (nil). 
 
 (** Write down a theorem [fold_map_correct] stating that [fold_map] is
     correct, and prove it in Coq.  (Hint: again, remember that
     [reflexivity] simplifies expressions a bit more aggressively than
     [simpl].) *)
 
-(* FILL IN HERE *)
+Theorem fold_map_correct: forall (X Y : Type) (f : X -> Y) (lx: list X), fold_map f lx = map f lx.
+Proof. 
+  intros.
+  induction lx as [| lxh lxt IHlx].
+  - simpl. reflexivity.
+  - simpl. rewrite <- IHlx. reflexivity.
+Qed.
+
 
 (* Do not modify the following line: *)
 Definition manual_grade_for_fold_map : option (nat*string) := None.
