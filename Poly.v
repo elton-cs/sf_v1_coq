@@ -990,7 +990,11 @@ Proof. reflexivity. Qed.
 Theorem fold_length_correct : forall X (l : list X),
   fold_length l = length l.
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros.
+  induction l as [| lh lt IHl].
+  - simpl. reflexivity.
+  - simpl. rewrite <- IHl. reflexivity.
+Qed. 
 (** [] *)
 
 (** **** Exercise: 3 stars, standard (fold_map)
