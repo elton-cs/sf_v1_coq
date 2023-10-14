@@ -1271,16 +1271,16 @@ Proof. compute. reflexivity. Qed.
     Finding the right type can be tricky. *)
 
 Definition exp (n m : cnat) : cnat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+:= fun (X : Type) => m (X -> X) (n X).
 
-Example exp_1 : exp two two = plus two two.
-Proof. (* FILL IN HERE *) Admitted.
+Example exp_11 : exp two two = plus two two.
+Proof. compute. reflexivity. Qed.
 
 Example exp_2 : exp three zero = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 Example exp_3 : exp three two = plus (mult two (mult two two)) one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 (** [] *)
 
