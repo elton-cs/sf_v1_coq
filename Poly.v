@@ -1193,16 +1193,16 @@ Proof. reflexivity. Qed.
     output. In other words, do it [n] times, then do it once more. *)
 
 Definition scc (n : cnat) : cnat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+:= fun (X : Type) ( succ : X -> X ) (zero : X) => succ (n X succ zero).
 
 Example scc_1 : scc zero = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 Example scc_2 : scc one = two.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 Example scc_3 : scc two = three.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 
 (** [] *)
 
