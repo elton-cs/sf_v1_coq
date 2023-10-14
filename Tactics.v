@@ -104,11 +104,15 @@ Proof.
     that theorem as part of your (relatively short) solution to this
     exercise. You do not need [induction]. *)
 
+    Search (rev).
+
 Theorem rev_exercise1 : forall (l l' : list nat),
   l = rev l' ->
   l' = rev l.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. rewrite H. symmetry. apply rev_involutive. Qed.
+  (* without apply tactic: 
+  intros. symmetry. rewrite <- rev_involutive. rewrite H. reflexivity. Qed. *)
 (** [] *)
 
 (** **** Exercise: 1 star, standard, optional (apply_rewrite)
