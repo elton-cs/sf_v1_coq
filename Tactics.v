@@ -104,8 +104,6 @@ Proof.
     that theorem as part of your (relatively short) solution to this
     exercise. You do not need [induction]. *)
 
-    Search (rev).
-
 Theorem rev_exercise1 : forall (l l' : list nat),
   l = rev l' ->
   l' = rev l.
@@ -195,7 +193,7 @@ Example trans_eq_exercise : forall (n m o p : nat),
      (n + p) = m ->
      (n + p) = (minustwo o).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros m n o p eq1 eq2. transitivity n. apply eq2. apply eq1. Qed.
 (** [] *)
 
 (* ################################################################# *)
