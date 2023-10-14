@@ -1217,17 +1217,17 @@ Proof. reflexivity. Qed.
     [x]. *)
 
 Definition plus (n m : cnat) : cnat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+:= fun (X : Type) ( succ : X -> X ) (zero : X) => n X succ (m X succ zero).
 
 Example plus_1 : plus zero one = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 Example plus_2 : plus two three = plus three two.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 Example plus_3 :
   plus (plus two two) three = plus one (plus three three).
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 (** [] *)
 
