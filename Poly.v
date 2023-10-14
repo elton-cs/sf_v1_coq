@@ -1246,16 +1246,16 @@ Proof. compute. reflexivity. Qed.
     unchanged. *)
 
 Definition mult (n m : cnat) : cnat
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+:= fun (X : Type) ( succ : X -> X ) (zero : X) => n X (m X succ) zero.
 
 Example mult_1 : mult one one = one.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 Example mult_2 : mult zero (plus three three) = zero.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 Example mult_3 : mult two three = plus three three.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. compute. reflexivity. Qed.
 
 (** [] *)
 
