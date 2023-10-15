@@ -754,7 +754,17 @@ Theorem nth_error_after_last: forall (n : nat) (X : Type) (l : list X),
   length l = n ->
   nth_error l n = None.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. generalize dependent n.
+  induction l as [| lh lt IHl].
+  - intros.
+    destruct n as [|n'] eqn:N.
+    + simpl. reflexivity.
+    + simpl. reflexivity.
+  - intros.
+    destruct n as [|n'] eqn:N.
+    + simpl. discriminate.
+    + simpl. apply IHl. simpl in H. injection H as H'. apply H'.
+Qed.    
 (** [] *)
 
 (* ################################################################# *)
