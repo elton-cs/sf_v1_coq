@@ -1202,7 +1202,13 @@ Theorem filter_exercise : forall (X : Type) (test : X -> bool)
   filter test l = x :: lf ->
   test x = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros X test x l.
+  induction l as [|lh lt IHl].
+  - intros. simpl in H. discriminate.
+  - intros. simpl in IHl. simpl in H. destruct (test lh) eqn:T.
+    + injection H as H1 H2. rewrite H1 in T. apply T.
+    + apply IHl in H. apply H.
+Qed.   
 (** [] *)
 
 (** **** Exercise: 4 stars, advanced, especially useful (forall_exists_challenge)
