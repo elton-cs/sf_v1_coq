@@ -403,7 +403,8 @@ Proof.
 Theorem not_implies_our_not : forall (P:Prop),
   ~ P -> (forall (Q:Prop), P -> Q).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros P eq1 Q eq2. unfold not in eq1. destruct eq1. apply eq2.
+Qed.
 (** [] *)
 
 (** Inequality is a very common form of negated statement, so there is a
