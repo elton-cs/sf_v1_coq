@@ -678,7 +678,22 @@ Qed.
 Theorem or_distributes_over_and : forall P Q R : Prop,
   P \/ (Q /\ R) <-> (P \/ Q) /\ (P \/ R).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros P Q R. split.
+  - intros [Ha | Hb].
+    + split.
+      -- left. apply Ha.
+      -- left. apply Ha.  
+    + destruct Hb as [H1 H2]. split.
+      -- right. apply H1.
+      -- right. apply H2.
+  - intros [[HP1 | HQ] [HP2 | HR]].
+    + left. apply HP1.
+    + left. apply HP1.
+    + left. apply HP2.
+    + right. split.
+      -- apply HQ.
+      -- apply HR.
+Qed.   
 (** [] *)
 
 (* ================================================================= *)
