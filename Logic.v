@@ -481,7 +481,8 @@ Qed.
 Theorem not_both_true_and_false : forall P : Prop,
   ~ (P /\ ~P).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. unfold not. intros h1. destruct h1 as [T1 T2]. apply T2 in T1. apply T1.
+Qed.
 (** [] *)
 
 (** **** Exercise: 1 star, advanced (informal_not_PNP)
