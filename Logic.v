@@ -660,12 +660,18 @@ Qed.
 Theorem iff_refl : forall P : Prop,
   P <-> P.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros. split.
+  - intros. apply H.
+  - intros. apply H.
+Qed.    
 
 Theorem iff_trans : forall P Q R : Prop,
   (P <-> Q) -> (Q <-> R) -> (P <-> R).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros P Q R HPQ HQR. split.
+  - intros. apply HQR. apply HPQ. apply H.
+  - intros. apply HPQ. apply HQR. apply H.
+Qed.   
 (** [] *)
 
 (** **** Exercise: 3 stars, standard (or_distributes_over_and) *)
