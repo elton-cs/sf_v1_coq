@@ -507,7 +507,11 @@ Definition manual_grade_for_informal_not_PNP : option (nat*string) := None.
 Theorem de_morgan_not_or : forall (P Q : Prop),
     ~ (P \/ Q) -> ~P /\ ~Q.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros P Q. unfold not.
+  intros h1. split.
+  - intros. destruct h1 in H. left. apply H.
+  - intros. destruct h1 in H. right. apply H.
+Qed.  
 (** [] *)
 
 (** Since inequality involves a negation, it also requires a little
