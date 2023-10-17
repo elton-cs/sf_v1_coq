@@ -1237,43 +1237,93 @@ Qed.
     [existsb'] and [existsb] have the same behavior.
 *)
 
-Fixpoint forallb {X : Type} (test : X -> bool) (l : list X) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint forallb {X : Type} (test : X -> bool) (l : list X) : bool := 
+  match l with
+  | [] => true
+  | lh :: lt => 
+    match test lh with
+    | true => forallb test lt
+    | false => false
+    end
+  end.
 
 Example test_forallb_1 : forallb odd [1;3;5;7;9] = true.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
 Example test_forallb_2 : forallb negb [false;false] = true.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
 Example test_forallb_3 : forallb even [0;2;4;5] = false.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
 Example test_forallb_4 : forallb (eqb 5) [] = true.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
-Fixpoint existsb {X : Type} (test : X -> bool) (l : list X) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Fixpoint existsb {X : Type} (test : X -> bool) (l : list X) : bool :=
+  match l with
+  | [] => false
+  | lh :: lt =>
+    match test lh with
+    | true => true
+    | false => existsb test lt
+    end
+  end.
 
 Example test_existsb_1 : existsb (eqb 5) [0;2;3;6] = false.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
 Example test_existsb_2 : existsb (andb true) [true;true;false] = true.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
 Example test_existsb_3 : existsb odd [1;0;0;0;0;3] = true.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
 Example test_existsb_4 : existsb even [] = false.
-Proof. (* FILL IN HERE *) Admitted.
+Proof. simpl. reflexivity. Qed.  
 
-Definition existsb' {X : Type} (test : X -> bool) (l : list X) : bool
-  (* REPLACE THIS LINE WITH ":= _your_definition_ ." *). Admitted.
+Definition existsb' {X : Type} (test : X -> bool) (l : list X) : bool :=
+  negb (forallb ( fun x => negb (test x) ) l).
 
+
+
+  Example test_existsb_1' : existsb' (eqb 5) [0;2;3;6] = false.
+  Proof. reflexivity. Qed.  
+  
+  Example test_existsb_2' : existsb' (andb true) [true;true;false] = true.
+  Proof. reflexivity. Qed.  
+  
+  Example test_existsb_3' : existsb' odd [1;0;0;0;0;3] = true.
+  Proof. reflexivity. Qed.  
+  
+  Example test_existsb_4' : existsb' even [] = false.
+  Proof. reflexivity. Qed.  
+
+
+(*
+existsb' (andb true) [true;true;false] = true
+*)
+
+Lemma existsb_relates_forallb : forall (X : Type) (test : X -> bool) (l : list X),
+existsb test (l) =
+negb (forallb (fun x0 : X => negb (test x0)) (l)).
+Proof.
+  intros. induction l as [|lh lt Ihl].
+  - simpl. reflexivity.
+  - simpl. destruct (test lh) eqn:Tlh.
+    + simpl. reflexivity.
+    + simpl. apply Ihl.
+Qed.  
+  
 Theorem existsb_existsb' : forall (X : Type) (test : X -> bool) (l : list X),
   existsb test l = existsb' test l.
-Proof. (* FILL IN HERE *) Admitted.
-
+Proof.
+  intros.
+  induction l as [|lh lt Ihl].
+  - simpl. reflexivity.
+  - destruct (lh::lt) eqn:Dlhlt.
+    + simpl. reflexivity.
+    + injection Dlhlt as H1 H2. apply existsb_relates_forallb.
+Qed. 
 (** [] *)
 
 (* 2023-08-23 11:29 *)
