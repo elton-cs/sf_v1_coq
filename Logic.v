@@ -340,7 +340,11 @@ Qed.
 Theorem or_commut : forall P Q : Prop,
   P \/ Q  -> Q \/ P.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  destruct H as [HP | HQ].
+  - right. apply HP.
+  - left. apply HQ.
+Qed.  
 (** [] *)
 
 (* ================================================================= *)
